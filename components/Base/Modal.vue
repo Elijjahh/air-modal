@@ -43,8 +43,10 @@ const isVisible = defineModel<boolean>('visible');
   }
 
   &__body {
+    overflow: auto;
     position: relative;
     margin: 50px auto;
+    max-height: calc(100% - 100px);
 
     background: rgb(255, 255, 255);
     padding: 40px;

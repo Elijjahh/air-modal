@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const inputId = useId();
 
-const props = defineProps<{ label: string; type?: 'default' | 'horizontal' }>();
+const props = defineProps<{ label: string; type?: 'default' | 'horizontal'; invalid?: boolean }>();
 const modelValue = defineModel<string>({ default: '' });
 
 const isHorizontal = computed(() => {
@@ -14,7 +14,7 @@ const isFilled = computed(() => {
 </script>
 
 <template>
-  <div class="input" :class="{ horizontal: isHorizontal }">
+  <div class="input" :class="{ horizontal: isHorizontal, invalid }">
     <input
       :id="inputId"
       v-model="modelValue"
@@ -39,6 +39,10 @@ const isFilled = computed(() => {
 
   &:has(&__body:focus) {
     border: 2px solid rgb(23, 75, 124);
+  }
+
+  &.invalid {
+    border: 2px solid red !important;
   }
 
   &__body {
@@ -74,6 +78,10 @@ const isFilled = computed(() => {
     letter-spacing: 0%;
 
     transition: all 0.3s;
+  }
+
+  &.invalid &__label {
+    color: red;
   }
 
   &:not(.horizontal) &__body:focus + &__label,
