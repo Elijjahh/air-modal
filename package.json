@@ -1,6 +1,7 @@
 {
   "name": "nuxt-app",
   "private": true,
+  "homepage": "https://elijjahh.github.io/air-modal/",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -8,7 +9,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "predeploy": "bun run build --preset github_pages || npm run build --preset github_pages",
+    "deploy": "gh-pages --dotfiles -d .output/public"
   },
   "dependencies": {
     "@nuxt/eslint": "1.2.0",
@@ -20,6 +23,7 @@
     "@vueuse/nuxt": "^13.0.0",
     "eslint": "^9.0.0",
     "focus-trap": "^7",
+    "gh-pages": "^6.3.0",
     "maska": "^3.1.1",
     "nuxt": "^3.16.1",
     "vee-validate": "^4.15.0",
