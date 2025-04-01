@@ -10,7 +10,11 @@ defineProps<{
 }>();
 
 const value = defineModel<string>({ default: '' });
-const unmaskedValue = defineModel<string>('unmasked');
+const unmaskedValue = defineModel<string>('unmasked', { default: '' });
+
+onMounted(() => {
+  value.value = unmaskedValue.value;
+});
 
 defineExpose({ unmaskedValue });
 </script>
