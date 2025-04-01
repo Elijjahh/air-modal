@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 const isVisible = defineModel<boolean>('visible');
 
+const emit = defineEmits<{
+  showThankYou: [];
+}>();
+
 const name = ref('');
 const phone = ref('');
 const address = ref('');
@@ -28,14 +32,34 @@ const options = ref([
 
 const selected = ref({ key: 'production', label: 'Производственная площадь' });
 
-function submitForm() {
+const error = ref('');
+
+async function submitForm() {
   const submitData = {
     name: name.value,
     phone: phone.value,
     address: address.value,
     selected: selected.value,
+    space: space.value,
+    dates: dates.value,
   };
-  console.log(submitData);
+
+  error.value = '';
+
+  try {
+    const result = await $fetch('https://httpbin.org/status/200,409', {
+      method: 'POST',
+      body: submitData,
+    });
+
+    console.log(result);
+
+    isVisible.value = false;
+    emit('showThankYou');
+  } catch (err) {
+    console.log(err);
+    error.value = 'Уже есть резидент с таким номером телефона';
+  }
 }
 </script>
 
@@ -71,6 +95,8 @@ function submitForm() {
           />
         </div>
 
+        <p class="residence-modal__error">{{ error }}</p>
+
         <BaseButton class="residence-modal__btn">Отправить</BaseButton>
       </form>
     </div>
@@ -96,6 +122,11 @@ function submitForm() {
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  &__error {
+    margin-top: 10px;
+    color: red;
   }
 
   &__btn {
