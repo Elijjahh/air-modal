@@ -7,6 +7,7 @@ defineProps<{
   multiple?: boolean;
   options: T[];
   optionLabel: T extends string ? undefined : string;
+  invalid?: boolean;
 }>();
 
 const selectedOption = defineModel<T | T[]>();
@@ -19,7 +20,7 @@ function focusSelect() {
 </script>
 
 <template>
-  <div class="select" @click="focusSelect">
+  <div class="select" :class="{ invalid }" @click="focusSelect">
     <label class="select__label">{{ label }}</label>
     <VueSelect
       ref="select"
@@ -72,6 +73,10 @@ function focusSelect() {
     border: 2px solid rgb(23, 75, 124);
   }
 
+  &.invalid {
+    border: 2px solid red !important;
+  }
+
   &__label {
     cursor: pointer;
     color: rgb(23, 75, 124);
@@ -79,6 +84,10 @@ function focusSelect() {
     font-weight: 300;
     line-height: 110%;
     letter-spacing: 0%;
+  }
+
+  &.invalid &__label {
+    color: red;
   }
 
   &__arrow {
