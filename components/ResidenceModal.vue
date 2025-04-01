@@ -2,6 +2,7 @@
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as zod from 'zod';
+import { useStorage } from '@vueuse/core';
 
 const isVisible = defineModel<boolean>('visible');
 
@@ -56,8 +57,17 @@ const validationSchema = toTypedSchema(
   }),
 );
 
+const userData = useStorage('user-data', {
+  name: '',
+  phone: '',
+  address: '',
+});
+
 const { handleSubmit, errors } = useForm({
   validationSchema,
+  initialValues: {
+    ...userData.value,
+  },
 });
 
 const { value: name } = useField<string>('name');
@@ -128,6 +138,12 @@ async function submitForm() {
 
     isVisible.value = false;
     emit('showThankYou');
+
+    userData.value = {
+      name: name.value,
+      phone: phone.value,
+      address: address.value,
+    };
   } catch {
     error.value = 'Уже есть резидент с таким номером телефона';
   }
