@@ -129,12 +129,10 @@ async function submitForm() {
   error.value = '';
 
   try {
-    const result = await $fetch('https://httpbin.org/status/200%2C409', {
+    await $fetch('https://httpbin.org/status/200%2C409', {
       method: 'POST',
       body: submitData,
     });
-
-    console.log(result);
 
     isVisible.value = false;
     emit('showThankYou');
