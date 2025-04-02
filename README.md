@@ -1,75 +1,55 @@
-# Nuxt Minimal Starter
+# Air Modal
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Первый запуск
 
-## Setup
+### 1. Установка библиотек
 
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
+```sh
 bun install
+
+# или
+
+npm install
 ```
 
-## Development Server
+### 2. Запуск проекта
 
-Start the development server on `http://localhost:3000`:
+```sh
+bun dev
 
-```bash
-# npm
+# или
+
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Проверка проекта, сборка и деплой
 
-Build the application for production:
+### Форматирование
 
-```bash
-# npm
-npm run build
+```sh
+bun format
 
-# pnpm
-pnpm build
+# или
 
-# yarn
-yarn build
+npm run format
+```
 
-# bun
+### Сборка
+
+```sh
 bun run build
+
+# или
+
+npm run build
 ```
 
-Locally preview production build:
+### Деплой на gh-pages
 
-```bash
-# npm
-npm run preview
+```sh
+bun run deploy
 
-# pnpm
-pnpm preview
+# или
 
-# yarn
-yarn preview
-
-# bun
-bun run preview
+npm run deploy
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
