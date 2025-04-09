@@ -53,3 +53,5 @@ bun run deploy
 
 npm run deploy
 ```
+
+> Для деплоя добавить в .env NUXT_APP_BASE_URL=/air-modal/
